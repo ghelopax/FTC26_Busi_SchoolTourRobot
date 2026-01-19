@@ -2,9 +2,11 @@
  /\_/\  /\_/\  /\_/\  /\_/\
 ( o.o )( o.o )( o.o )( o.o )
  > ^ <  > ^ <  > ^ <  > ^ <
- /\_/\                /\_/\
-( o.o )   ghelopax   ( o.o )
- > ^ <                > ^ <
+
+ /\_/\    ghelopax    /\_/\
+( o.o )              ( o.o )
+ > ^ <   @itsmevjnk   > ^ <
+
  /\_/\  /\_/\  /\_/\  /\_/\
 ( o.o )( o.o )( o.o )( o.o )
  > ^ <  > ^ <  > ^ <  > ^ <
@@ -18,7 +20,7 @@
 // CONFIGURE
 // #########
 
-/* CONSTANTS. CREDIT: itsmevjnk */
+/* CONSTANTS */
 // Drive motor speed
 #define SPD_DRIVE           3072
 #define SPD_DEAD            80
