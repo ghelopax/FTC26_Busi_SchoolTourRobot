@@ -99,14 +99,9 @@ void PS2_init() {
 }
 
 /* Control */
-void dc_control(uint8_t channelA, uint8_t channelB, int16_t speed, bool brake = false) {
-  if (speed > -SPD_DEAD && speed < SPD_DEAD)
-    speed = 0;
-  uint16_t speed_a = (brake) ? 4095 : ((speed > 0) ? speed : 0);
-  uint16_t speed_b = (brake) ? 4095 : ((speed < 0) ? (-speed) : 0);
-
-  pwm.setPWM(channelA, 0, speed_a);
-  pwm.setPWM(channelB, 0, speed_b);
+void dc_control(uint8_t channelA, uint8_t channelB, int16_t speed) {
+  pwm.setPWM(channelA, 0, ((speed > 0) ?   speed  : 0));
+  pwm.setPWM(channelB, 0, ((speed < 0) ? (-speed) : 0));
 }
 
 void servo_control(uint8_t channel, float value) {
