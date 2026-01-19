@@ -1,3 +1,15 @@
+/*
+ /\_/\  /\_/\  /\_/\  /\_/\
+( o.o )( o.o )( o.o )( o.o )
+ > ^ <  > ^ <  > ^ <  > ^ <
+ /\_/\                /\_/\
+( o.o )   ghelopax   ( o.o )
+ > ^ <                > ^ <
+ /\_/\  /\_/\  /\_/\  /\_/\
+( o.o )( o.o )( o.o )( o.o )
+ > ^ <  > ^ <  > ^ <  > ^ <
+*/
+
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 #include <PS2X_lib.h>
@@ -6,13 +18,15 @@
 // CONFIGURE
 // #########
 
-/* CONSTANTS */
+/* CONSTANTS. CREDIT: itsmevjnk */
 // Drive motor speed
 #define SPD_DRIVE           3072
 #define SPD_DEAD            80
 // Servo PW
 #define PW_MIN              440
 #define PW_MAX              2270
+#define CR_PW_MIN           400
+#define CR_PW_MID           1400
 
 /* PWM channels */
 // DC Motor
@@ -25,7 +39,7 @@
 #define SERVO_ARM_Y         3
 #define SERVO_CLAW          4
 
-/* PS2 pins */
+/* PS2 */
 #define PS2_DAT             12
 #define PS2_CMD             13
 #define PS2_ATT             15
@@ -97,6 +111,10 @@ void servo_control(uint8_t channel, float value) {
   pwm.writeMicroseconds(channel, PW_MIN + value * (PW_MAX - PW_MIN));
 }
 
+void CRservo_control(uint8_t channel, float value) {
+  pwm.writeMicroseconds(channel, PW_MID + value * (PW_MID - PW_MIN));
+}
+
 
 // ##########
 // SUBSYSTEMS
@@ -122,36 +140,17 @@ void drivetrain_update() {
 }
 
 /* ARM */
-float arm_x_pos;
-float arm_y_pos;
-
-void arm_init() {
-  arm_x_pos = 0.0;
-  arm_y_pos = 0.0;
-}
-
 void arm_update() {
-  if (ps2.Button(PSB_TRIANGLE)) pos_update(arm_y_pos,  0.1, 0.0, 1.0);
-  if (ps2.Button(PSB_CROSS))    pos_update(arm_y_pos, -0.1, 0.0, 1.0);
-  if (ps2.Button(PSB_CIRCLE))   pos_update(arm_x_pos,  0.1, 0.0, 1.0);
-  if (ps2.Button(PSB_SQUARE))   pos_update(arm_x_pos, -0.1, 0.0, 1.0);
-
-  servo_control(SERVO_ARM_X, arm_x_pos);
-  servo_control(SERVO_ARM_Y, arm_y_pos);
+  if (ps2.Button(PSB_TRIANGLE)) CRservo_control(SERVO_ARM_X,  0.5);
+  if (ps2.Button(PSB_CROSS))    CRservo_control(SERVO_ARM_X, -0.5);
+  if (ps2.Button(PSB_CIRCLE))   CRservo_control(SERVO_ARM_Y,  0.5);
+  if (ps2.Button(PSB_SQUARE))   CRservo_control(SERVO_ARM_Y, -0.5);
 }
 
 /* CLAW */
-float claw_pos;
-
-void claw_init() {
-  claw_pos = 0.0;
-}
-
 void claw_update() {
-  if (ps2.Button(PSB_PAD_UP))   pos_update(claw_pos,  0.1, 0.0, 1.0);
-  if (ps2.Button(PSB_PAD_DOWN)) pos_update(claw_pos, -0.1, 0.0, 1.0);
-
-  servo_control(SERVO_CLAW, claw_pos);
+  if (ps2.Button(PSB_PAD_UP))   CRservo_control(SERVO_CLAW,  0.5);
+  if (ps2.Button(PSB_PAD_DOWN)) CRservo_control(SERVO_CLAW, -0.5);
 }
 
 
