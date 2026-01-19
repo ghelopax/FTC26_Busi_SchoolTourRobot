@@ -1,12 +1,12 @@
 /*
- /\_/\  /\_/\  /\_/\  /\_/\
-( o.o )( o.o )( o.o )( o.o )
- > ^ <  > ^ <  > ^ <  > ^ <
-
- /\_/\    ghelopax    /\_/\
-( o.o )              ( o.o )
+ /\_/\  /\_/\  /\_/\  /\_/\        School_Tour_FTC.ino:
+( o.o )( o.o )( o.o )( o.o )       |___CONFIGURATION: Constants and channels
+ > ^ <  > ^ <  > ^ <  > ^ <        |___PWM DRIVER: Adafruit PWM Servo Driver
+#######              #######       |___HARDWARE API: dc_control(), servo_control(), CRservo_control()
+ /\_/\    ghelopax    /\_/\        |___SUBSYSTEMS: Drivetrain, Arm, Claw
+( o.o )              ( o.o )       |___ARDUINO FUNCTIONS: setup(), loop()
  > ^ <   @itsmevjnk   > ^ <
-
+#######              #######
  /\_/\  /\_/\  /\_/\  /\_/\
 ( o.o )( o.o )( o.o )( o.o )
  > ^ <  > ^ <  > ^ <  > ^ <
@@ -16,9 +16,9 @@
 #include <Adafruit_PWMServoDriver.h>
 #include <PS2X_lib.h>
 
-// #########
-// CONFIGURE
-// #########
+// #############
+// CONFIGURATION
+// #############
 
 /* CONSTANTS */
 // Drive motor speed
@@ -41,7 +41,7 @@
 #define SERVO_ARM_Y         3
 #define SERVO_CLAW          4
 
-/* PS2 */
+/* PS2 pins */
 #define PS2_DAT             12
 #define PS2_CMD             13
 #define PS2_ATT             15
