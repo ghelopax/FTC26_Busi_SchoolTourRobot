@@ -114,7 +114,7 @@ void servo_control(uint8_t channel, float value) {
 }
 
 void CRservo_control(uint8_t channel, float value) {
-  pwm.writeMicroseconds(channel, PW_MID + value * (PW_MID - PW_MIN));
+  pwm.writeMicroseconds(channel, CR_PW_MID + value * (CR_PW_MID - CR_PW_MIN));
 }
 
 
@@ -166,8 +166,9 @@ void setup() {
   PWMDriver_init();
   PS2_init();
 
-  arm_init();
-  claw_init();
+  CRservo_control(SERVO_ARM_X, 0.0);
+  CRservo_control(SERVO_ARM_Y, 0.0);
+  CRservo_control(SERVO_CLAW , 0.0);
 }
 
 void loop() {
