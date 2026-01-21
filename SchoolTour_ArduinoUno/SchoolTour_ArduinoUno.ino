@@ -1,5 +1,5 @@
 /*
- /\_/\  /\_/\  /\_/\  /\_/\        School_Tour_FTC.ino:
+ /\_/\  /\_/\  /\_/\  /\_/\        SchoolTour_ArduinoUno.ino:
 ( o.o )( o.o )( o.o )( o.o )       |___CONFIGURATION: Constants and channels
  > ^ <  > ^ <  > ^ <  > ^ <        |___PWM DRIVER: Adafruit PWM Servo Driver
 #######              #######       |___HARDWARE API: dc_control()
@@ -72,13 +72,13 @@ void PS2_init() {
   while (error != 0) {
     switch (error) {
       case 1:
-        Serial.println("Error code 1: No controller found, check wiring.");
+        Serial.println("\nError code 1: No controller found, check wiring.");
         break;
       case 2:
-        Serial.println("Error code 2: Controller found but not accepting commands.");
+        Serial.println("\nError code 2: Controller found but not accepting commands.");
         break;
       case 3:
-        Serial.println("Error code 3: Controller refusing to enter Pressures mode, may not support it. ");
+        Serial.println("\nError code 3: Controller refusing to enter Pressures mode, may not support it. ");
         break;
     }
 
@@ -116,6 +116,8 @@ void drivetrain_update() {
 void setup() {
   Serial.begin(115200);  // baud rate (bps)
 
+  // Serial.println("START");
+
   PWMDriver_init();
   PS2_init();
 }
@@ -125,8 +127,8 @@ void loop() {
 
   drivetrain_update();
 
-  Serial.print("PSS_LY: ");
-  Serial.println(ps2.Analog(PSS_LY));
-  Serial.print("PSS_RY: ");
-  Serial.println(ps2.Analog(PSS_RY));
+  // Serial.print("PSS_LY: ");
+  // Serial.print(ps2.Analog(PSS_LY));
+  // Serial.print(", PSS_RY: ");
+  // Serial.println(ps2.Analog(PSS_RY));
 }
