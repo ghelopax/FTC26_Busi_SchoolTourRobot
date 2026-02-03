@@ -146,8 +146,8 @@ void arm_update() {
 
 /* CLAW */
 void claw_update() {
-  if (ps2.Button(PSB_PAD_UP))   CRservo_control(SERVO_CLAW,  0.5);
-  if (ps2.Button(PSB_PAD_DOWN)) CRservo_control(SERVO_CLAW, -0.5);
+  if (ps2.Button(PSB_PAD_UP))   servo_control(SERVO_CLAW, 1.0);
+  if (ps2.Button(PSB_PAD_DOWN)) servo_control(SERVO_CLAW, 0.0);
 }
 
 
@@ -163,7 +163,7 @@ void setup() {
 
   CRservo_control(SERVO_ARM_X, 0.0);
   CRservo_control(SERVO_ARM_Y, 0.0);
-  CRservo_control(SERVO_CLAW , 0.0);
+  servo_control  (SERVO_CLAW , 0.0);
 }
 
 void loop() {

@@ -24,18 +24,24 @@
 // Drive motor speed
 #define SPD_DRIVE           3072
 
+/*nhap cua tm
+*/
+#define I2C_SDA 21
+#define I2C_SCL 22
+
 /* PWM channels */
 // DC Motor
-#define MOTOR_DRIVE_LEFT_A  3
+#define MOTOR_DRIVE_LEFT_A  4
 #define MOTOR_DRIVE_LEFT_B  5
-#define MOTOR_DRIVE_RIGHT_A 6
-#define MOTOR_DRIVE_RIGHT_B 9
+#define MOTOR_DRIVE_RIGHT_A 0
+#define MOTOR_DRIVE_RIGHT_B 1
 
 /* PS2 pins */
-#define PS2_DAT             12
-#define PS2_CMD             11
-#define PS2_ATT             10
-#define PS2_CLK             13
+#define PS2_DAT 7
+#define PS2_CMD 2
+#define PS2_ATT 10
+#define PS2_CLK 6
+
 
 
 // ##########
@@ -53,7 +59,6 @@ void PWMDriver_init() {
   pwm.setPWMFreq(50);
   // Wire Init
   Wire.setClock(400000);
-
   Serial.println(F("done."));
 }
 
@@ -115,7 +120,7 @@ void drivetrain_update() {
 
 void setup() {
   Serial.begin(115200);  // baud rate (bps)
-
+  //Wire.begin(I2C_SDA, I2C_SCL);
   // Serial.println("START");
 
   PWMDriver_init();
@@ -127,8 +132,10 @@ void loop() {
 
   drivetrain_update();
 
-  // Serial.print("PSS_LY: ");
-  // Serial.print(ps2.Analog(PSS_LY));
-  // Serial.print(", PSS_RY: ");
-  // Serial.println(ps2.Analog(PSS_RY));
+  Serial.print("Error code: ");
+  Serial.print(ps2.config_gamepad(PS2_CLK, PS2_CMD, PS2_ATT, PS2_DAT));
+  Serial.print(", PSS_LY: ");
+  Serial.print(ps2.Analog(PSS_LY));
+  Serial.print(", PSS_RY: ");
+  Serial.println(ps2.Analog(PSS_RY));
 }
